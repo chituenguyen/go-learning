@@ -1,0 +1,92 @@
+1. Go Modules & Packages (1 giờ)
+bash# NestJS: npm init / package.json
+# Go: go mod
+
+# Tạo project mới
+mkdir myapp
+cd myapp
+go mod init github.com/yourusername/myapp  # Tạo go.mod
+
+# go.mod giống package.json
+# go.sum giống package-lock.json
+```
+
+**Project structure:**
+```
+myapp/
+├── go.mod              # Dependencies
+├── go.sum              # Lock file
+├── main.go             # Entry point
+├── config/             # Package config
+│   └── config.go
+├── models/             # Package models
+│   └── user.go
+├── handlers/           # Package handlers (controllers)
+│   └── user_handler.go
+├── services/           # Package services
+│   └── user_service.go
+└── repository/         # Package repository
+    └── user_repo.go
+Package basics:
+go// models/user.go
+package models  // Package name
+
+import "time"
+
+// Exported (public) - Uppercase first letter
+type User struct {
+    ID        int       `json:"id"`
+    Name      string    `json:"name"`
+    Email     string    `json:"email"`
+    CreatedAt time.Time `json:"created_at"`
+}
+
+// Unexported (private) - lowercase
+type userInternal struct {
+    password string
+}
+
+// Exported function
+func NewUser(name, email string) *User {
+    return &User{
+        Name:      name,
+        Email:     email,
+        CreatedAt: time.Now(),
+    }
+}
+
+// Unexported function
+func validateEmail(email string) bool {
+    // private helper
+    return true
+}
+go// main.go
+package main
+
+import (
+    "fmt"
+    "github.com/yourusername/myapp/models"  // Import package
+)
+
+func main() {
+    // Use exported types/functions
+    user := models.NewUser("Tue", "tue@example.com")
+    fmt.Println(user.Name)
+    
+    // Cannot access unexported
+    // user := models.newUser()  // Error: unexported
+}
+Installing dependencies:
+bash# Install package (giống npm install)
+go get github.com/gin-gonic/gin
+go get gorm.io/gorm
+go get gorm.io/driver/postgres
+
+# go.mod sẽ tự update:
+# require (
+#     github.com/gin-gonic/gin v1.9.1
+#     gorm.io/gorm v1.25.5
+# )
+
+# Clean unused dependencies
+go mod tidy
