@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Learn Gin Framework",
+    "description": "Study the basics of Gin web framework for Go",
+    "completed": false,
+    "created_at": "2026-01-25T10:00:00Z",
+    "updated_at": "2026-01-25T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Build REST API",
+    "description": "Create a complete REST API with CRUD operations",
+    "completed": true,
+    "created_at": "2026-01-25T11:00:00Z",
+    "updated_at": "2026-01-25T11:30:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Test API endpoints",
+    "description": "Test all endpoints using Postman or curl",
+    "completed": false,
+    "created_at": "2026-01-25T12:00:00Z",
+    "updated_at": "2026-01-25T12:00:00Z"
+  }
+]
